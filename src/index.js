@@ -1,3 +1,76 @@
-module.exports = function toReadable (number) {
-  
+module.exports = function toReadable(number) {
+    let num = number.toString().split('');
+
+    let data = {
+        0: 'zero',
+        1: 'one',
+        2: 'two',
+        3: 'three',
+        4: 'four',
+        5: 'five',
+        6: 'six',
+        7: 'seven',
+        8: 'eight',
+        9: 'nine',
+        10: 'ten',
+        11: 'eleven',
+        12: 'twelve',
+        13: 'thirteen',
+        14: 'fourteen',
+        15: 'fifteen',
+        16: 'sixteen',
+        17: 'seventeen',
+        18: 'eighteen',
+        19: 'nineteen',
+        20: 'twenty',
+        30: 'thirty',
+        40: 'forty',
+        50: 'fifty',
+        60: 'sixty',
+        70: 'seventy',
+        80: 'eighty',
+        90: 'ninety'
+    }
+    let res;
+
+    // 14
+    if (number <= 20) {
+        res = data[number];
+        return res;
+    }
+
+    // 75
+    if (number < 100) {
+        if (number % 10 === 0) {
+            res = data[number];
+            return res;
+        } else {
+            let numYZ = Number(`${num[0]}0`);
+            res = `${data[numYZ]} ${data[num[1]]}`;
+            return res;
+        }
+    }
+
+
+    // 960
+    if (number < 1000) {
+        data[0] = '';
+        let numYZ = Number(`${num[1]}${num[2]}`);
+
+        if (number % 100 === 0) {
+            res = `${data[num[0]]} hundred`;
+            return res;
+        } else if (number % 10 === 0) {
+            numYZ = Number(`${num[1]}0`);
+            res = `${data[num[0]]} hundred ${data[numYZ]}`;
+            return res;
+        } else if (numYZ <= 20) {
+            res = `${data[num[0]]} hundred ${data[numYZ]}`;
+            return res;
+        } else {
+            let numYZ = Number(`${num[1]}0`);
+            res = `${data[num[0]]} hundred ${data[numYZ]} ${data[num[2]]}`;
+            return res;
+        }
+    }
 }
